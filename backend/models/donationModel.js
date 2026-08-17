@@ -1,0 +1,5 @@
+import pool from '../config/db.js';
+export const create = async ({ user_id, district_id, amount, payment_method, transaction_id }) => (await pool.execute('INSERT INTO donations (user_id,district_id,amount,payment_method,transaction_id) VALUES (?,?,?,?,?)', [user_id,district_id || null,amount,payment_method,transaction_id]))[0];
+export const byUser = async (id) => (await pool.execute(`SELECT donation_id,amount,payment_method,transaction_id,payment_status,donated_at,COALESCE(d.district_name,'General All-District Fund') district_name FROM donations dn LEFT JOIN districts d ON d.district_id=dn.district_id WHERE user_id=? ORDER BY donated_at DESC`, [id]))[0];
+export const allWithUsers = async () => (await pool.execute(`SELECT dn.donation_id, dn.amount, dn.payment_method, dn.transaction_id, dn.payment_status, dn.donated_at, u.full_name, u.email, u.phone_number, COALESCE(d.district_name,'General All-District Fund') district_name FROM donations dn JOIN users u ON u.user_id=dn.user_id LEFT JOIN districts d ON d.district_id=dn.district_id ORDER BY dn.donated_at DESC`))[0];
+

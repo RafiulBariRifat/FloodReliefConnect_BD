@@ -1,0 +1,6 @@
+import pool from '../config/db.js';
+export const create = async (x) => (await pool.execute('INSERT INTO relief_requests (user_id,district_id,family_members,vulnerable_count,address_details,urgency_level,requested_amount) VALUES (?,?,?,?,?,?,?)',[x.user_id,x.district_id,x.family_members,x.vulnerable_count || 0,x.address_details,x.urgency_level || 'High',x.requested_amount || 0]))[0];
+export const byUser = async (id) => (await pool.execute(`SELECT rr.*,d.district_name FROM relief_requests rr JOIN districts d ON d.district_id=rr.district_id WHERE user_id=? ORDER BY applied_at DESC`,[id]))[0];
+export const all = async () => (await pool.execute(`SELECT rr.*,u.full_name,u.phone_number,u.nid_number,u.email,d.district_name FROM relief_requests rr JOIN users u ON u.user_id=rr.user_id JOIN districts d ON d.district_id=rr.district_id ORDER BY FIELD(status,'pending','approved','rejected'),applied_at DESC`))[0];
+export const updateStatus = async (id,status,remarks,approved_amount) => (await pool.execute('UPDATE relief_requests SET status=?,admin_remarks=?,approved_amount=? WHERE request_id=?',[status,remarks || null,approved_amount !== undefined && approved_amount !== null && approved_amount !== '' ? approved_amount : null,id]))[0];
+export const remove = async (id) => (await pool.execute('DELETE FROM relief_requests WHERE request_id=?',[id]))[0];

@@ -1,0 +1,3 @@
+import * as relief from '../models/reliefModel.js';
+export const apply = async (req,res) => { const x=req.body; if (!x.district_id || !(Number(x.family_members)>0) || !x.address_details?.trim()) return res.status(400).json({message:'District, family size, and complete address are required.'}); try { const result=await relief.create({...x,user_id:req.user.user_id}); res.status(201).json({message:'Relief request submitted for review.',request_id:result.insertId}); } catch { res.status(500).json({message:'Unable to submit relief request.'}); } };
+export const myRequests = async (req,res) => res.json(await relief.byUser(req.user.user_id));

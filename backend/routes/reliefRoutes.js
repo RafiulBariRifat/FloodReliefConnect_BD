@@ -1,0 +1,1 @@
+import { Router } from 'express'; import * as c from '../controllers/reliefController.js'; import { authenticateToken } from '../middlewares/authMiddleware.js'; const r=Router(); r.use(authenticateToken); r.post('/apply',c.apply); r.get('/my-requests',c.myRequests); export default r;

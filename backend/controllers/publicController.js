@@ -1,0 +1,6 @@
+import pool from '../config/db.js';
+import { allActive } from '../models/districtModel.js';
+export const districts = async (_req,res) => res.json(await allActive());
+export const stats = async (_req,res) => { const [[stats]] = await pool.execute(`SELECT COALESCE((SELECT SUM(amount) FROM donations WHERE payment_status='completed'),0) totalDonations,(SELECT COUNT(*) FROM users WHERE role='user') totalUsers,(SELECT COUNT(*) FROM relief_requests WHERE status='approved') approvedFamilies`); res.json(stats); };
+export const districtDonations = async (_req,res) => { const [rows]=await pool.execute(`SELECT d.district_id,d.district_name,COALESCE(SUM(dn.amount),0) total_donated FROM districts d LEFT JOIN donations dn ON dn.district_id=d.district_id AND dn.payment_status='completed' GROUP BY d.district_id,d.district_name ORDER BY total_donated DESC`); res.json(rows); };
+export const districtRelief = async (_req,res) => { const [rows]=await pool.execute(`SELECT d.district_id,d.district_name,COUNT(rr.request_id) approved_requests,COALESCE(SUM(rr.requested_amount),0) disbursed_amount FROM districts d LEFT JOIN relief_requests rr ON rr.district_id=d.district_id AND rr.status='approved' GROUP BY d.district_id,d.district_name`); res.json(rows); };

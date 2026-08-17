@@ -1,0 +1,1 @@
+import { Router } from 'express'; import * as c from '../controllers/donationController.js'; import { authenticateToken } from '../middlewares/authMiddleware.js'; const r=Router(); r.use(authenticateToken); r.post('/',c.donate); r.get('/my-history',c.history); export default r;

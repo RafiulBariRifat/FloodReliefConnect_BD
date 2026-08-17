@@ -1,0 +1,2 @@
+import { Router } from 'express'; import * as c from '../controllers/adminController.js'; import { authenticateToken } from '../middlewares/authMiddleware.js'; import { requireAdmin } from '../middlewares/adminMiddleware.js'; const r=Router(); r.use(authenticateToken,requireAdmin); r.get('/relief-requests',c.requests); r.get('/donations',c.donations); r.put('/relief-requests/:id/status',c.updateRequest); r.delete('/relief-requests/:id',c.deleteRequest); r.get('/analytics',c.analytics); export default r;
+

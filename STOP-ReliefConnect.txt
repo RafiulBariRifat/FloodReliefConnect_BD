@@ -1,0 +1,3 @@
+To stop the local website, close the two windows titled:
+- ReliefConnect Backend - keep this window open
+- ReliefConnect Frontend - keep this window open

@@ -1,0 +1,1 @@
+import { Router } from 'express'; import * as c from '../controllers/publicController.js'; const r=Router(); r.get('/stats',c.stats); r.get('/districts',c.districts); r.get('/district-donations',c.districtDonations); r.get('/district-relief',c.districtRelief); export default r;
