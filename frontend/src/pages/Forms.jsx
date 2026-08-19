@@ -37,14 +37,14 @@ function FormHero({ eyebrow, title, bnTitle, sub, bnSub }) {
     <section className="rw-page-hero rw-hero-forms">
       <div className="container">
         <span className="rw-hero-eyebrow">
-          <Lock size={14} className="text-warning" /> SECURE SUBMISSION PORTAL &bull; সুরক্ষিত মানবিক সহায়তা পোর্টাল
+          <Lock size={14} className="text-warning me-1.5" /> SECURE HUMANITARIAN PORTAL &bull; অত্যন্ত সুরক্ষিত ব্যবস্থা
         </span>
-        <h1 className="rw-hero-title">
+        <h1 className="rw-hero-title mb-2">
           {title}
-          {bnTitle && <span className="d-block fs-3 fw-bold text-warning mt-1">{bnTitle}</span>}
+          {bnTitle && <span className="d-block fs-3 fw-bold text-warning opacity-90 mt-1">{bnTitle}</span>}
         </h1>
-        <p className="rw-hero-subtitle mb-0">{sub}</p>
-        {bnSub && <p className="rw-hero-subtitle text-light opacity-90 mt-1">{bnSub}</p>}
+        <p className="rw-hero-subtitle mb-1">{sub}</p>
+        {bnSub && <p className="rw-hero-subtitle text-light opacity-80 small mt-1">{bnSub}</p>}
       </div>
     </section>
   );
@@ -61,10 +61,11 @@ function Districts({ value, onChange }) {
 
   return (
     <label className="field">
-      Affected District Location / প্লাবিত জেলা নির্বাচন করুন
+      <span className="fw-bold text-dark d-block">Affected District Location</span>
+      <small className="text-muted d-block mb-1.5 font-size-xs">প্লাবিত জেলা নির্বাচন করুন</small>
       <select required value={value} onChange={(e) => onChange(e.target.value)}>
-        <option value="">Choose a district location / জেলা বেছে নিন</option>
-        <option value="">General all-district flood fund / সাধারণ ত্রাণ তহবিল (সকল জেলা)</option>
+        <option value="">Choose a district location...</option>
+        <option value="">General All-District Flood Relief Fund (সাধারণ ত্রাণ তহবিল)</option>
         {items.map((x) => (
           <option key={x.district_id} value={x.district_id}>
             {x.district_name} District ({x.district_name} জেলা)
@@ -85,7 +86,7 @@ export function Donate() {
     try {
       await api.post('/donations', f);
       flash('Donation recorded successfully. Thank you!');
-      setStatus('Your payment receipt has been saved to My Activity history. আপনার অনুদানের রসিদ মাই অ্যাক্টিভিটিতে জমা হয়েছে।');
+      setStatus('Your payment receipt has been saved to My Activity history.');
       setF({ ...f, amount: '', transaction_id: '' });
     } catch (e) {
       setStatus(getError(e));
@@ -96,39 +97,41 @@ export function Donate() {
     <div className="rw-page-canvas-forms">
       <FormHero
         title="Make a Flood Relief Donation"
-        bnTitle="বন্যা দুর্গতদের জন্য সাহায্য প্রদান করুন"
-        sub="Every contribution directly supports submerged families across Bangladesh. Select a district location or support the general fund."
-        bnSub="আপনার সামান্য অনুদানে বাঁচতে পারে প্লাবিত অঞ্চলের একটি অসহায় পরিবার। প্রতিটি টাকা সরাসরি ডিজিটাল লেজারে স্বচ্ছতার সাথে সংরক্ষিত হয়।"
+        bnTitle="বন্যা দুর্গতদের সাহায্যার্থে অনুদান দিন"
+        sub="Directly fund emergency relief operations across Bangladesh's flood-affected districts."
+        bnSub="আপনার অনুদান সরাসরি প্লাবিত এলাকার অসহায় মানুষদের বেঁচে থাকার রসদ জোগাবে।"
       />
       <div className="container narrow">
-        <div className="form-card bg-white p-4 p-md-5 rounded-3 border shadow-sm">
-          <div className="d-flex align-items-center gap-2 mb-4 pb-3 border-bottom text-primary fw-bold">
-            <HeartHandshake size={22} />
-            <span>Encrypted Payment Ledger Record &bull; ইনক্রিপ্টেড পেমেন্ট রসিদ</span>
+        <div className="form-card bg-white p-4 p-md-5 rounded-4 border shadow-sm">
+          <div className="d-flex align-items-center gap-2 mb-4 pb-3 border-bottom text-success fw-bold fs-6">
+            <HeartHandshake size={22} className="text-success" />
+            <span>Verified Encrypted Payment Ledger &bull; অনুদান রেজিস্টার</span>
           </div>
 
           <form onSubmit={submit}>
             <Districts value={f.district_id} onChange={(v) => setF({ ...f, district_id: v })} />
 
-            <div className="row">
+            <div className="row g-3">
               <div className="col-md-6">
                 <label className="field">
-                  Donation Amount (BDT ৳) / অনুদানের পরিমাণ
+                  <span className="fw-bold text-dark d-block">Donation Amount (BDT ৳)</span>
+                  <small className="text-muted d-block mb-1.5 font-size-xs">অনুদানের পরিমাণ</small>
                   <input
                     type="number"
                     min="1"
                     required
                     value={f.amount}
                     onChange={(e) => setF({ ...f, amount: e.target.value })}
-                    placeholder="e.g. 5000 (যেমন: ৫০০০ টাকা)"
+                    placeholder="e.g. 5000"
                   />
                 </label>
               </div>
               <div className="col-md-6">
                 <label className="field">
-                  Payment Method / পেমেন্ট মাধ্যম
+                  <span className="fw-bold text-dark d-block">Payment Gateway</span>
+                  <small className="text-muted d-block mb-1.5 font-size-xs">পেমেন্ট মাধ্যম</small>
                   <select value={f.payment_method} onChange={(e) => setF({ ...f, payment_method: e.target.value })}>
-                    {['bKash (বিকাশ)', 'Nagad (নগদ)', 'Rocket (রকেট)', 'Bank Transfer (ব্যাংক ট্রান্সফার)'].map((x) => (
+                    {['bKash', 'Nagad', 'Rocket', 'Bank Transfer'].map((x) => (
                       <option key={x}>{x}</option>
                     ))}
                   </select>
@@ -136,25 +139,26 @@ export function Donate() {
               </div>
             </div>
 
-            <label className="field">
-              Transaction ID / Transaction Reference (ট্রানজেকশন আইডি)
+            <label className="field mt-3">
+              <span className="fw-bold text-dark d-block">Transaction Reference ID</span>
+              <small className="text-muted d-block mb-1.5 font-size-xs">ট্রানজেকশন আইডি (bKash/Nagad/Rocket Reference)</small>
               <input
                 required
                 value={f.transaction_id}
                 onChange={(e) => setF({ ...f, transaction_id: e.target.value })}
-                placeholder="e.g. BK7A2L9X (যেমন: বিকাশ/নগদ রেফারেন্স আইডি)"
+                placeholder="e.g. BK7A2L9X"
               />
             </label>
 
             {status && (
-              <div className="alert alert-info rounded-3 p-3 my-3 fw-semibold">
+              <div className="alert alert-success rounded-3 p-3 my-3 fw-semibold small">
                 <CheckCircle2 size={18} className="me-2 text-success" />
                 {status}
               </div>
             )}
 
-            <button className="btn btn-primary w-100 rounded-pill py-2.5 fw-bold fs-6 mt-3 shadow-sm">
-              Record Donation Receipt / অনুদান রসিদ জমা দিন &rarr;
+            <button className="btn btn-primary w-100 rounded-pill py-3 fw-bold fs-6 mt-4 shadow-sm">
+              Confirm & Record Donation Receipt &rarr;
             </button>
           </form>
         </div>
@@ -233,8 +237,8 @@ export function ApplyRelief() {
       <FormHero
         title="Request Verified Flood Relief Assistance"
         bnTitle="জরুরি বন্যা ত্রাণ ও আর্থিক সহায়তার আবেদন"
-        sub="Connect directly with verified response coordinators. Your emergency information is encrypted and treated with strict priority."
-        bnSub="বন্যা দুর্গত এলাকার অসহায় পরিবারগুলোর সাহায্যার্থে — প্রতিটি আবেদন সরাসরি জেলা ত্রাণ সমন্বয়কদের কাছে পৌঁছে দেওয়া হয়।"
+        sub="Connect directly with verified district coordinators and relief response teams."
+        bnSub="আপনার আবেদন সরাসরি জেলা ত্রাণ টিমের কাছে পৌঁছাবে — দ্রুত সহায়তার সর্বোচ্চ চেষ্টা।"
       />
       <div className="container narrow">
         {submittedData ? (
@@ -242,32 +246,33 @@ export function ApplyRelief() {
             <div className="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle p-3 mb-3" style={{ width: '72px', height: '72px' }}>
               <CheckCircle2 size={42} />
             </div>
-            <h2 className="h4 fw-extrabold text-dark mb-2">Application Submitted Successfully! / আপনার আবেদনটি জমা হয়েছে!</h2>
-            <p className="text-secondary small max-w-md mx-auto mb-4">
-              Your request for emergency flood assistance has been recorded in our secure ledger. Local verification teams review urgent applications on priority.
-              <br />
-              <strong className="text-dark d-block mt-1">আপনার একটি আবেদনও বৃথা যাবে না। দ্রুততম সময়ে ত্রাণ সহায়তা পৌঁছে দেওয়ার ব্যবস্থা নেওয়া হচ্ছে।</strong>
+            <h2 className="h4 fw-extrabold text-dark mb-2">Application Submitted Successfully</h2>
+            <p className="text-secondary small max-w-md mx-auto mb-2">
+              Your request for emergency flood assistance has been recorded in our encrypted ledger.
             </p>
+            <div className="p-2 bg-success bg-opacity-10 rounded-3 text-success fw-bold small max-w-md mx-auto mb-4">
+              আপনার প্রতিটি আবেদন সর্বোচ্চ অগ্রাধিকারের ভিত্তিতে দ্রুততম সময়ে প্রসেস করা হচ্ছে।
+            </div>
 
             <div className="bg-light p-3.5 rounded-3 border text-start mb-4">
               <div className="row g-3 small">
                 <div className="col-6 col-md-3">
-                  <span className="text-muted d-block font-size-xs uppercase fw-bold">Urgency Level / জরুরি অবস্থা</span>
+                  <span className="text-muted d-block font-size-xs uppercase fw-bold">Urgency Level</span>
                   <span className={`fw-bold ${submittedData.urgency_level === 'Critical' ? 'text-danger' : submittedData.urgency_level === 'High' ? 'text-warning' : 'text-success'}`}>
                     ● {submittedData.urgency_level}
                   </span>
                 </div>
                 <div className="col-6 col-md-3">
-                  <span className="text-muted d-block font-size-xs uppercase fw-bold">Family Size / সদস্য</span>
+                  <span className="text-muted d-block font-size-xs uppercase fw-bold">Family Size</span>
                   <span className="fw-bold text-dark">{submittedData.family_members} Members ({submittedData.vulnerable_count} Vulnerable)</span>
                 </div>
                 <div className="col-6 col-md-3">
-                  <span className="text-muted d-block font-size-xs uppercase fw-bold">Requested Aid / দাবি</span>
+                  <span className="text-muted d-block font-size-xs uppercase fw-bold">Requested Aid</span>
                   <span className="fw-bold text-dark">{submittedData.requested_amount ? `৳${Number(submittedData.requested_amount).toLocaleString()}` : 'General Relief Goods'}</span>
                 </div>
                 <div className="col-6 col-md-3">
-                  <span className="text-muted d-block font-size-xs uppercase fw-bold">Status / অবস্থা</span>
-                  <span className="badge bg-warning text-dark fw-bold">Pending Review (যাচাইাধীন)</span>
+                  <span className="text-muted d-block font-size-xs uppercase fw-bold">Status</span>
+                  <span className="badge bg-warning text-dark fw-bold">Pending Review</span>
                 </div>
               </div>
             </div>
@@ -279,7 +284,7 @@ export function ApplyRelief() {
               </Link>
               <button type="button" onClick={handleReset} className="btn btn-outline-secondary rounded-pill px-4 py-2.5 fw-bold d-inline-flex align-items-center justify-content-center gap-2">
                 <RefreshCw size={15} />
-                <span>Submit Another Request / নতুন আবেদন করুন</span>
+                <span>Submit Another Request</span>
               </button>
             </div>
           </div>
@@ -288,38 +293,41 @@ export function ApplyRelief() {
             <div className="step-progress-bar">
               <div className="step-node active">
                 <div className="step-circle">1</div>
-                <span className="step-label">Urgency (তীব্রতা)</span>
+                <span className="step-label">Urgency</span>
               </div>
               <div className="step-node active">
                 <div className="step-circle">2</div>
-                <span className="step-label">District (জেলা)</span>
+                <span className="step-label">District</span>
               </div>
               <div className="step-node active">
                 <div className="step-circle">3</div>
-                <span className="step-label">Family (সদস্য)</span>
+                <span className="step-label">Family</span>
               </div>
               <div className="step-node active">
                 <div className="step-circle">4</div>
-                <span className="step-label">Needs (প্রয়োজন)</span>
+                <span className="step-label">Needs</span>
               </div>
               <div className="step-node active">
                 <div className="step-circle">5</div>
-                <span className="step-label">Grant (অনুদানের দাবি)</span>
+                <span className="step-label">Grant Claim</span>
               </div>
             </div>
 
             <div className="privacy-banner">
-              <ShieldCheck size={26} className="flex-shrink-0 text-success" />
+              <ShieldCheck size={26} className="flex-shrink-0 text-success me-2" />
               <div>
-                <strong>Confidential & Encrypted Portal (সুরক্ষিত ও গোপনীয় আবেদন):</strong> Your details are protected under Bangladesh emergency relief protocols. Only verified district coordinators can view your location and contact details.
-                <span className="d-block mt-0.5 text-success font-monospace small">আপনার ব্যক্তিগত তথ্য সুরক্ষিত। শুধু অনুমোদিত ত্রাণ টিম আপনার যোগাযোগের ঠিকানা দেখতে পাবে।</span>
+                <strong className="d-block text-dark">Confidential & Encrypted Relief Portal</strong>
+                <span className="text-secondary small">আপনার সকল তথ্য সম্পূর্ণ সুরক্ষিত। শুধুমাত্র অনুমোদিত ত্রাণ টিম আপনার যোগাযোগের ঠিকানা ও অবস্থান দেখতে পাবে।</span>
               </div>
             </div>
 
             <form onSubmit={submit}>
               <div className="relief-section-title">
                 <span className="relief-step-num">1</span>
-                <span>Select Urgency & Emergency Level (জরুরি প্রয়োজনের তীব্রতা বেছে নিন)</span>
+                <div>
+                  <span className="fw-bold d-block">Select Emergency Level & Priority</span>
+                  <small className="text-muted font-size-xs fw-normal">জরুরি প্রয়োজনের তীব্রতা নির্বাচন করুন</small>
+                </div>
               </div>
 
               <div className="urgency-grid">
@@ -329,11 +337,11 @@ export function ApplyRelief() {
                 >
                   <div className="urgency-header">
                     <span className="urgency-title d-flex align-items-center gap-1.5">
-                      🔴 Critical / অত্যন্ত জরুরি {f.urgency_level === 'Critical' && <CheckCircle2 size={16} className="text-danger" />}
+                      🔴 Critical Level {f.urgency_level === 'Critical' && <CheckCircle2 size={16} className="text-danger" />}
                     </span>
                     <AlertTriangle size={18} className="text-danger" />
                   </div>
-                  <p className="urgency-desc">Submerged home, immediate life safety, stranded families, or medical emergency. (ভিটেমাটি প্লাবিত, পানিবন্দি পরিবার ও জরুরি জীবন রক্ষা)</p>
+                  <p className="urgency-desc">Submerged home, immediate life safety, stranded families. <span className="d-block text-muted font-size-xs mt-1">ভিটেমাটি প্লাবিত, পানিবন্দি পরিবার ও জীবন রক্ষা।</span></p>
                 </div>
 
                 <div
@@ -342,11 +350,11 @@ export function ApplyRelief() {
                 >
                   <div className="urgency-header">
                     <span className="urgency-title d-flex align-items-center gap-1.5">
-                      🟡 High / জরুরি ত্রাণ தேவை {f.urgency_level === 'High' && <CheckCircle2 size={16} className="text-warning" />}
+                      🟡 High Priority {f.urgency_level === 'High' && <CheckCircle2 size={16} className="text-warning" />}
                     </span>
                     <HandHeart size={18} className="text-warning" />
                   </div>
-                  <p className="urgency-desc">Urgent need for food packs, safe drinking water, baby food, or essential medicines. (খাদ্য, বিশুদ্ধ পানি, স্যালাইন ও শিশুখাদ্যের জরুরি প্রয়োজন)</p>
+                  <p className="urgency-desc">Urgent food packs, clean drinking water, ORSaline, baby milk. <span className="d-block text-muted font-size-xs mt-1">খাদ্য, বিশুদ্ধ পানি, স্যালাইন ও শিশুখাদ্য।</span></p>
                 </div>
 
                 <div
@@ -355,30 +363,37 @@ export function ApplyRelief() {
                 >
                   <div className="urgency-header">
                     <span className="urgency-title d-flex align-items-center gap-1.5">
-                      🟢 Moderate / সাধারণ পুনবার্সন {f.urgency_level === 'Moderate' && <CheckCircle2 size={16} className="text-success" />}
+                      🟢 Moderate Support {f.urgency_level === 'Moderate' && <CheckCircle2 size={16} className="text-success" />}
                     </span>
                     <Home size={18} className="text-success" />
                   </div>
-                  <p className="urgency-desc">Post-flood rehabilitation, sanitation kits, dry rations, or structural repair. (বন্যা পরবর্তী ঘরবাড়ি মেরামত ও জীবনযাত্রা স্বাভাবিকীকরণ)</p>
+                  <p className="urgency-desc">Post-flood rehabilitation, dry rations, structural repairs. <span className="d-block text-muted font-size-xs mt-1">ঘরবাড়ি মেরামত ও জীবনযাত্রা স্বাভাবিকীকরণ।</span></p>
                 </div>
               </div>
 
               <div className="relief-section-title">
                 <span className="relief-step-num">2</span>
-                <span>Affected District Location (প্লাবিত জেলা ও এলাকা)</span>
+                <div>
+                  <span className="fw-bold d-block">Select Affected District</span>
+                  <small className="text-muted font-size-xs fw-normal">প্লাবিত জেলা বেছে নিন</small>
+                </div>
               </div>
 
               <Districts value={f.district_id} onChange={(v) => setF({ ...f, district_id: v })} />
 
               <div className="relief-section-title">
                 <span className="relief-step-num">3</span>
-                <span>Household Size & Vulnerability (পরিবারের মোট সদস্য ও শিশু/বৃদ্ধ গণনা)</span>
+                <div>
+                  <span className="fw-bold d-block">Household Size & Family Count</span>
+                  <small className="text-muted font-size-xs fw-normal">পরিবারের সদস্য ও শিশু/বৃদ্ধ সংখ্যা</small>
+                </div>
               </div>
 
               <div className="row g-3">
                 <div className="col-md-6">
                   <label className="field">
-                    Total Family Members Count (পরিবারের মোট সদস্য সংখ্যা)
+                    <span className="fw-bold text-dark d-block">Total Family Members</span>
+                    <small className="text-muted d-block mb-1.5 font-size-xs">পরিবারের মোট সদস্য সংখ্যা</small>
                     <div className="d-flex align-items-center gap-2 mt-1">
                       <button
                         type="button"
@@ -409,7 +424,8 @@ export function ApplyRelief() {
 
                 <div className="col-md-6">
                   <label className="field">
-                    Vulnerable Members (Children / Elderly / Sick - শিশু/বৃদ্ধ/অসুস্থ সদস্য)
+                    <span className="fw-bold text-dark d-block">Vulnerable Members</span>
+                    <small className="text-muted d-block mb-1.5 font-size-xs">শিশু / বৃদ্ধ / অসুস্থ সদস্য সংখ্যা</small>
                     <div className="d-flex align-items-center gap-2 mt-1">
                       <button
                         type="button"
@@ -440,11 +456,14 @@ export function ApplyRelief() {
 
               <div className="relief-section-title">
                 <span className="relief-step-num">4</span>
-                <span>Detailed Location & Immediate Needs (জরুরি সহায়তার বিবরণ ও বিস্তারিত ঠিকানা)</span>
+                <div>
+                  <span className="fw-bold d-block">Detailed Location & Immediate Needs</span>
+                  <small className="text-muted font-size-xs fw-normal">জরুরি সহায়তার বিবরণ ও যোগাযোগের ঠিকানা</small>
+                </div>
               </div>
 
               <div className="mb-2">
-                <span className="small text-muted fw-semibold d-block mb-1.5">⚡ Tap Quick Relief Need Chips to Add Automatically (খাবার/ওষুধ বোতাম চাপুন):</span>
+                <span className="small text-muted fw-semibold d-block mb-1.5">⚡ Tap Quick Relief Chips to Add Automatically:</span>
                 <div className="d-flex flex-wrap gap-2 mb-2.5">
                   {quickNeeds.map((qn, idx) => (
                     <button
@@ -460,29 +479,34 @@ export function ApplyRelief() {
               </div>
 
               <label className="field">
-                Address & Specific Relief Requirements (গ্রাম, ইউনিয়ন পরিষদ, ওয়ার্ড নম্বর ও আশ্রয়কেন্দ্রের পরিচিতি)
+                <span className="fw-bold text-dark d-block">Detailed Address & Special Needs</span>
+                <small className="text-muted d-block mb-1.5 font-size-xs">গ্রাম, ইউনিয়ন পরিষদ, ওয়ার্ড নম্বর এবং নিকটস্থ স্থান উল্লেখ করুন</small>
                 <textarea
                   required
                   rows="4"
                   value={f.address_details}
                   onChange={(e) => setF({ ...f, address_details: e.target.value })}
-                  placeholder="গ্রামের নাম, ইউনিয়ন পরিষদ, ওয়ার্ড নম্বর এবং নিকটস্থ স্থান বা মোবাইল নম্বর উল্লেখ করুন (যেমন: সিলেট সদর, কানাইঘাট ইউনিয়ন, সরকারী প্রাথমিক বিদ্যালয়ের পাশে)..."
+                  placeholder="Include Village, Union Parishad, Ward number, landmark, or mobile contact..."
                 />
               </label>
 
               <div className="relief-section-title">
                 <span className="relief-step-num">5</span>
-                <span>Estimated Cash Support Grant Needed (জরুরি নগদ সহায়তার দাবি ৳ BDT)</span>
+                <div>
+                  <span className="fw-bold d-block">Estimated Cash Support Grant Claim (BDT ৳)</span>
+                  <small className="text-muted font-size-xs fw-normal">জরুরি নগদ আর্থিক সহায়তার দাবি</small>
+                </div>
               </div>
 
               <label className="field">
-                Requested Cash Grant Amount (BDT ৳ অনুদান দাবি)
+                <span className="fw-bold text-dark d-block">Requested Cash Support Amount (BDT ৳)</span>
+                <small className="text-muted d-block mb-1.5 font-size-xs">টাকার পরিমাণ নির্বাচন করুন অথবা টাইপ করুন</small>
                 <input
                   type="number"
                   min="0"
                   value={f.requested_amount}
                   onChange={(e) => setF({ ...f, requested_amount: e.target.value })}
-                  placeholder="টাকার পরিমাণ লিখুন অথবা নিচের বাটন থেকে নির্বাচন করুন"
+                  placeholder="Enter amount in BDT"
                 />
               </label>
 
@@ -502,9 +526,9 @@ export function ApplyRelief() {
               <div className="summary-preview-card">
                 <div className="d-flex align-items-center justify-content-between mb-2">
                   <b className="text-dark small d-flex align-items-center gap-1.5">
-                    <FileText size={15} className="text-primary" /> Application Verification Summary / আবেদনের সারসংক্ষেপ
+                    <FileText size={15} className="text-success" /> Application Verification Summary
                   </b>
-                  <span className="badge bg-primary bg-opacity-10 text-primary fw-bold">Ready to Submit</span>
+                  <span className="badge bg-success bg-opacity-10 text-success fw-bold">Ready to Submit</span>
                 </div>
                 <div className="row g-2 small text-secondary">
                   <div className="col-6 col-sm-3">
