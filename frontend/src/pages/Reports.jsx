@@ -115,10 +115,31 @@ export default function Reports() {
               ))}
             </div>
 
-            <div className="p-3.5 bg-success-subtle border border-success-subtle rounded-3 text-dark mb-3">
+            <div className="p-3.5 bg-success-subtle border border-success-subtle rounded-3 text-dark mb-4">
               <b className="text-success d-block mb-1">🌱 Benefits vs ⚠️ Catastrophic Destruction:</b>
               <p className="small mb-1"><strong>Silt Benefits:</strong> {WIKIPEDIA_FLOOD_COMPENDIUM.benefitsVsDamages.benefits}</p>
               <p className="small mb-0"><strong>Extreme Destruction:</strong> {WIKIPEDIA_FLOOD_COMPENDIUM.benefitsVsDamages.damages}</p>
+            </div>
+
+            {/* Flood Preparation & Mitigation Measures */}
+            <div className="mb-4">
+              <h4 className="h6 fw-bold text-dark mb-3">🛠️ Wikipedia: Flood Preparation & Mitigation Protocols</h4>
+              <div className="row g-3">
+                {WIKIPEDIA_FLOOD_COMPENDIUM.preparation.map((p, idx) => (
+                  <div key={idx} className="col-md-6">
+                    <div className="p-3 bg-white border rounded-3 shadow-xs h-100">
+                      <b className="text-primary d-block mb-1">● {p.title}</b>
+                      <small className="text-secondary leading-relaxed d-block">{p.detail}</small>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Climate Variability */}
+            <div className="p-3 bg-warning-subtle border border-warning-subtle rounded-3 text-dark">
+              <b className="text-dark d-block mb-1">🌍 Climate Change & El Niño / La Niña Impact:</b>
+              <p className="small mb-0 text-secondary leading-relaxed">{WIKIPEDIA_FLOOD_COMPENDIUM.climateVariability}</p>
             </div>
           </div>
         )}

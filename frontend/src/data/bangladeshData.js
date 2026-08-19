@@ -586,6 +586,17 @@ export const WIKIPEDIA_FLOOD_COMPENDIUM = {
   benefitsVsDamages: {
     benefits: 'Small-scale natural flooding deposits nutrient-rich alluvial silt across fields, fertilizing agricultural soil, recharging groundwater, and diluting soil salinity.',
     damages: 'Extreme floods cause widespread loss of human life, destruction of soil-and-turf earthen embankments, crop inundation, waterborne disease outbreaks, and severe economic contraction.'
-  }
+  },
+  preparation: [
+    { title: 'Community-Based Preparedness (CPP)', detail: 'Local disaster management committees use multi-channel warning systems (flag signals, megaphones, radio) to evacuate vulnerable populations.' },
+    { title: 'Flood Shelter Suitability Mapping', detail: 'GIS multi-criteria assessment maps safe shelter zones elevated above 100-year flood levels across 64 districts.' },
+    { title: 'Embankment Reinforcement', detail: 'Transitioning from temporary soil-and-turf bunds built by local farmers to concrete-reinforced permanent river defense walls.' },
+    { title: 'Satellite Inundation Monitoring', detail: 'Utilizing Sentinel-1 SAR and MODIS satellite imagery for real-time flood extent mapping and damage evaluation.' }
+  ],
+  climateVariability: `
+    Global climate change and El Niño / La Niña cycles are shifting traditional monsoon patterns in Bangladesh. 
+    Increasing sea-surface temperatures in the Bay of Bengal trigger more frequent intense depressions, resulting in sudden unpredicted early-monsoon flash floods (such as the April 2017 Haor floods) and rapid river overflows.
+  `
 };
+
 
