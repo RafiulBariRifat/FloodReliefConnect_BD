@@ -164,7 +164,7 @@ export function ApplyRelief() {
     vulnerable_count: '1',
     address_details: '',
     urgency_level: 'High',
-    requested_amount: ''
+    requested_amount: '5000'
   });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
@@ -172,6 +172,30 @@ export function ApplyRelief() {
   const { flash } = useAuth();
 
   const presets = ['3000', '5000', '10000', '15000', '20000'];
+
+  const quickNeeds = [
+    { label: '🍞 Dry Food Packs', text: 'Dry food packs (puffed rice, molasses, biscuits)' },
+    { label: '💧 Water Purification', text: 'Water purification tablets & clean drinking water' },
+    { label: '💊 Essential Medicine', text: 'Oral rehydration saline, waterborne disease medicine & first-aid' },
+    { label: '⛺ Tarpaulin Shelter', text: 'Temporary tarpaulin shelter kit & rope' },
+    { label: '👶 Baby Milk / Food', text: 'Infant milk powder & baby food supplies' },
+    { label: '👕 Clothes & Blanket', text: 'Dry clothes, hygiene kit & blankets' }
+  ];
+
+  const handleQuickNeedClick = (text) => {
+    if (!f.address_details.includes(text)) {
+      const updated = f.address_details
+        ? `${f.address_details}\n- ${text}`
+        : `Immediate Need: ${text}`;
+      setF({ ...f, address_details: updated });
+    }
+  };
+
+  const adjustCount = (field, delta) => {
+    const current = parseInt(f[field] || '0', 10);
+    const next = Math.max(0, current + delta);
+    setF({ ...f, [field]: String(next) });
+  };
 
   const submit = async (e) => {
     e.preventDefault();
@@ -197,7 +221,7 @@ export function ApplyRelief() {
       vulnerable_count: '1',
       address_details: '',
       urgency_level: 'High',
-      requested_amount: ''
+      requested_amount: '5000'
     });
   };
 
@@ -254,6 +278,30 @@ export function ApplyRelief() {
           </div>
         ) : (
           <div className="form-card bg-white p-4 p-md-5 rounded-4 border shadow-sm">
+            {/* Visual Step Tracker */}
+            <div className="step-progress-bar">
+              <div className="step-node active">
+                <div className="step-circle">1</div>
+                <span className="step-label">Urgency</span>
+              </div>
+              <div className="step-node active">
+                <div className="step-circle">2</div>
+                <span className="step-label">District</span>
+              </div>
+              <div className="step-node active">
+                <div className="step-circle">3</div>
+                <span className="step-label">Family</span>
+              </div>
+              <div className="step-node active">
+                <div className="step-circle">4</div>
+                <span className="step-label">Needs</span>
+              </div>
+              <div className="step-node active">
+                <div className="step-circle">5</div>
+                <span className="step-label">Grant</span>
+              </div>
+            </div>
+
             <div className="privacy-banner">
               <ShieldCheck size={26} className="flex-shrink-0 text-success" />
               <div>
@@ -274,7 +322,9 @@ export function ApplyRelief() {
                   onClick={() => setF({ ...f, urgency_level: 'Critical' })}
                 >
                   <div className="urgency-header">
-                    <span className="urgency-title">Critical</span>
+                    <span className="urgency-title d-flex align-items-center gap-1.5">
+                      🔴 Critical {f.urgency_level === 'Critical' && <CheckCircle2 size={16} className="text-danger" />}
+                    </span>
                     <AlertTriangle size={18} className="text-danger" />
                   </div>
                   <p className="urgency-desc">Submerged home, immediate life safety, stranded families, or medical emergency.</p>
@@ -285,7 +335,9 @@ export function ApplyRelief() {
                   onClick={() => setF({ ...f, urgency_level: 'High' })}
                 >
                   <div className="urgency-header">
-                    <span className="urgency-title">High</span>
+                    <span className="urgency-title d-flex align-items-center gap-1.5">
+                      🟡 High {f.urgency_level === 'High' && <CheckCircle2 size={16} className="text-warning" />}
+                    </span>
                     <HandHeart size={18} className="text-warning" />
                   </div>
                   <p className="urgency-desc">Urgent need for food packs, safe drinking water, baby food, or essential medicines.</p>
@@ -296,7 +348,9 @@ export function ApplyRelief() {
                   onClick={() => setF({ ...f, urgency_level: 'Moderate' })}
                 >
                   <div className="urgency-header">
-                    <span className="urgency-title">Moderate</span>
+                    <span className="urgency-title d-flex align-items-center gap-1.5">
+                      🟢 Moderate {f.urgency_level === 'Moderate' && <CheckCircle2 size={16} className="text-success" />}
+                    </span>
                     <Home size={18} className="text-success" />
                   </div>
                   <p className="urgency-desc">Post-flood rehabilitation, sanitation kits, dry rations, or structural repair.</p>
@@ -314,41 +368,92 @@ export function ApplyRelief() {
               {/* STEP 3: HOUSEHOLD INFORMATION */}
               <div className="relief-section-title">
                 <span className="relief-step-num">3</span>
-                <span>Household Size & Vulnerability</span>
+                <span>Household Size & Vulnerability Steppers</span>
               </div>
 
-              <div className="row">
+              <div className="row g-3">
                 <div className="col-md-6">
                   <label className="field">
                     Total Family Members Count
-                    <input
-                      type="number"
-                      min="1"
-                      required
-                      value={f.family_members}
-                      onChange={(e) => setF({ ...f, family_members: e.target.value })}
-                      placeholder="e.g. 5"
-                    />
+                    <div className="d-flex align-items-center gap-2 mt-1">
+                      <button
+                        type="button"
+                        className="stepper-btn"
+                        onClick={() => adjustCount('family_members', -1)}
+                        disabled={parseInt(f.family_members || '0', 10) <= 1}
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        min="1"
+                        required
+                        className="text-center fw-bold fs-6 mb-0"
+                        value={f.family_members}
+                        onChange={(e) => setF({ ...f, family_members: e.target.value })}
+                      />
+                      <button
+                        type="button"
+                        className="stepper-btn"
+                        onClick={() => adjustCount('family_members', 1)}
+                      >
+                        +
+                      </button>
+                    </div>
                   </label>
                 </div>
+
                 <div className="col-md-6">
                   <label className="field">
-                    Vulnerable Members (Children / Elderly / Pregnant)
-                    <input
-                      type="number"
-                      min="0"
-                      value={f.vulnerable_count}
-                      onChange={(e) => setF({ ...f, vulnerable_count: e.target.value })}
-                      placeholder="e.g. 2"
-                    />
+                    Vulnerable Members (Children / Elderly / Sick)
+                    <div className="d-flex align-items-center gap-2 mt-1">
+                      <button
+                        type="button"
+                        className="stepper-btn"
+                        onClick={() => adjustCount('vulnerable_count', -1)}
+                        disabled={parseInt(f.vulnerable_count || '0', 10) <= 0}
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        min="0"
+                        className="text-center fw-bold fs-6 mb-0"
+                        value={f.vulnerable_count}
+                        onChange={(e) => setF({ ...f, vulnerable_count: e.target.value })}
+                      />
+                      <button
+                        type="button"
+                        className="stepper-btn"
+                        onClick={() => adjustCount('vulnerable_count', 1)}
+                      >
+                        +
+                      </button>
+                    </div>
                   </label>
                 </div>
               </div>
 
-              {/* STEP 4: ADDRESS & NEEDS */}
+              {/* STEP 4: ADDRESS & NEEDS WITH QUICK CHIPS */}
               <div className="relief-section-title">
                 <span className="relief-step-num">4</span>
                 <span>Detailed Location & Immediate Needs</span>
+              </div>
+
+              <div className="mb-2">
+                <span className="small text-muted fw-semibold d-block mb-1.5">⚡ Tap Quick Relief Need Chips to Add Automatically:</span>
+                <div className="d-flex flex-wrap gap-2 mb-2.5">
+                  {quickNeeds.map((qn, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className={`quick-need-chip ${f.address_details.includes(qn.text) ? 'selected' : ''}`}
+                      onClick={() => handleQuickNeedClick(qn.text)}
+                    >
+                      {qn.label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <label className="field">
@@ -358,18 +463,18 @@ export function ApplyRelief() {
                   rows="4"
                   value={f.address_details}
                   onChange={(e) => setF({ ...f, address_details: e.target.value })}
-                  placeholder="Include Village, Union Parishad, Ward number, nearby shelter/landmark (e.g. Near Govt High School), and specific items needed (cooked food, water purification tablets, saline, dry rice)..."
+                  placeholder="Include Village, Union Parishad, Ward number, nearby shelter/landmark (e.g. Near Govt High School), and specific items needed..."
                 />
               </label>
 
               {/* STEP 5: ASSISTANCE AMOUNT */}
               <div className="relief-section-title">
                 <span className="relief-step-num">5</span>
-                <span>Estimated Cash Support Needed (Optional BDT)</span>
+                <span>Estimated Cash Support Grant Needed (BDT ৳)</span>
               </div>
 
               <label className="field">
-                Amount in Bangladeshi Taka (BDT)
+                Requested Cash Grant Amount (BDT)
                 <input
                   type="number"
                   min="0"
@@ -392,6 +497,36 @@ export function ApplyRelief() {
                 ))}
               </div>
 
+              {/* Live Summary Preview Box before submission */}
+              <div className="summary-preview-card">
+                <div className="d-flex align-items-center justify-content-between mb-2">
+                  <b className="text-dark small d-flex align-items-center gap-1.5">
+                    <FileText size={15} className="text-primary" /> Application Verification Summary
+                  </b>
+                  <span className="badge bg-primary bg-opacity-10 text-primary fw-bold">Ready to Submit</span>
+                </div>
+                <div className="row g-2 small text-secondary">
+                  <div className="col-6 col-sm-3">
+                    <span className="text-muted d-block">Priority</span>
+                    <b className={f.urgency_level === 'Critical' ? 'text-danger' : f.urgency_level === 'High' ? 'text-warning' : 'text-success'}>
+                      ● {f.urgency_level}
+                    </b>
+                  </div>
+                  <div className="col-6 col-sm-3">
+                    <span className="text-muted d-block">Household</span>
+                    <b className="text-dark">{f.family_members} Persons</b>
+                  </div>
+                  <div className="col-6 col-sm-3">
+                    <span className="text-muted d-block">Vulnerable</span>
+                    <b className="text-dark">{f.vulnerable_count} Members</b>
+                  </div>
+                  <div className="col-6 col-sm-3">
+                    <span className="text-muted d-block">Grant Claim</span>
+                    <b className="text-success">৳{f.requested_amount ? Number(f.requested_amount).toLocaleString() : '0'}</b>
+                  </div>
+                </div>
+              </div>
+
               {err && (
                 <div className="alert alert-danger rounded-3 p-3 my-3 fw-semibold">
                   {err}
@@ -401,7 +536,7 @@ export function ApplyRelief() {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn btn-primary w-100 rounded-pill py-3 fw-bold fs-6 mt-4 shadow d-flex align-items-center justify-content-center gap-2"
+                className="btn btn-primary w-100 rounded-pill py-3 fw-bold fs-6 mt-3 shadow d-flex align-items-center justify-content-center gap-2"
               >
                 {loading ? (
                   <>
