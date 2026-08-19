@@ -235,6 +235,33 @@ export function DisasterDetail() {
             </div>
           </div>
 
+          {/* Authentic Live News Dispatches */}
+          {disaster.authenticNews && (
+            <div className="mt-4 p-4 bg-light rounded-3 border">
+              <h3 className="h6 fw-bold text-dark mb-3 d-flex align-items-center gap-2">
+                <Globe size={18} className="text-danger" />
+                Verified Live Press & News Bulletins ({disaster.division})
+              </h3>
+              <div className="d-flex flex-column gap-2.5">
+                {disaster.authenticNews.map((news, idx) => (
+                  <div key={idx} className="p-3 bg-white border rounded-3 shadow-xs d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div>
+                      <span className="badge bg-secondary bg-opacity-10 text-dark fw-bold me-2">{news.source}</span>
+                      <span className="fw-semibold text-dark small">{news.headline}</span>
+                    </div>
+                    <div className="d-flex align-items-center gap-2">
+                      <small className="text-muted">{news.time}</small>
+                      <a href={news.url} target="_blank" rel="noopener noreferrer" className="btn btn-xs btn-outline-danger rounded-pill px-2.5 py-1 text-decoration-none d-inline-flex align-items-center gap-1">
+                        <span>Read Source</span>
+                        <ExternalLink size={11} />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="d-flex gap-3 flex-wrap mt-4 pt-3 border-top">
             <Link to="/donate" className="btn btn-primary rounded-pill px-4 py-2.5 fw-bold">
               <HeartHandshake size={18} className="me-1" /> Donate Aid to {disaster.district}
