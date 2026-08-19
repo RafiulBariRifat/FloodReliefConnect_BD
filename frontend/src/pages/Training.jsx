@@ -105,23 +105,30 @@ export default function Training() {
                         <strong className="text-dark d-block">📍 Location / Address:</strong>
                         <span className="text-secondary">{center.location}</span>
                       </div>
-                      <div>
+                      <div className="mb-1.5">
                         <strong className="text-dark d-block">🏛️ Affiliation & Governance:</strong>
                         <span className="text-secondary">{center.affiliation}</span>
                       </div>
+                      <div>
+                        <strong className="text-primary d-block">🌐 Official Authentic Web Portal:</strong>
+                        <a href={center.website} target="_blank" rel="noopener noreferrer" className="text-primary fw-bold text-break">
+                          {center.website}
+                        </a>
+                      </div>
                     </div>
 
-                    <div className="mt-auto pt-2 border-top d-flex align-items-center justify-content-between">
+                    <div className="mt-auto pt-2 border-top d-flex align-items-center justify-content-between flex-wrap gap-2">
                       <span className="small text-success fw-bold d-inline-flex align-items-center gap-1">
-                        <ShieldCheck size={14} /> Verified National Partner
+                        <ShieldCheck size={14} /> Verified Authentic Institute
                       </span>
                       <a
                         href={center.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-sm btn-outline-primary rounded-pill px-3 py-1 fw-bold d-inline-flex align-items-center gap-1.5 text-decoration-none"
+                        className="btn btn-sm btn-primary rounded-pill px-3 py-1.5 fw-bold d-inline-flex align-items-center gap-1.5 text-decoration-none shadow-xs"
                       >
-                        <span>Official Portal</span>
+                        <Globe size={13} />
+                        <span>Visit Official Center Portal</span>
                         <ExternalLink size={12} />
                       </a>
                     </div>
