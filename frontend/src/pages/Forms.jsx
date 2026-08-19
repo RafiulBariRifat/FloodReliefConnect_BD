@@ -388,7 +388,6 @@ export function ApplyRelief() {
                         type="number"
                         min="1"
                         required
-                        placeholder="e.g. 5"
                         className="text-center fw-bold fs-6 mb-0"
                         value={f.family_members}
                         onChange={(e) => setF({ ...f, family_members: e.target.value })}
@@ -419,7 +418,6 @@ export function ApplyRelief() {
                       <input
                         type="number"
                         min="0"
-                        placeholder="e.g. 2"
                         className="text-center fw-bold fs-6 mb-0"
                         value={f.vulnerable_count}
                         onChange={(e) => setF({ ...f, vulnerable_count: e.target.value })}
