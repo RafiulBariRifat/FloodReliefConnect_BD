@@ -534,12 +534,81 @@ export const BANGLADESH_JOBS = [
   }
 ];
 
+export const AUTHENTIC_BD_TRAINING_CENTERS = [
+  {
+    id: 'tc-1',
+    name: 'Bangladesh Red Crescent Society (BDRCS) National Training Center',
+    acronym: 'BDRCS Training Dept',
+    location: '684-686 Bara Moghbazar, Dhaka & 64 District Units',
+    focusArea: 'First Aid, Search & Rescue, Flood Triage, International Humanitarian Law (IHL)',
+    affiliation: 'IFRC & Ministry of Disaster Management & Relief (MoDMR)',
+    website: 'https://bdrcs.org/training',
+    badge: 'Official Red Cross/Red Crescent Center',
+    details: 'Primary national provider of certified First Aid, Disaster Response, Water Safety, and Search & Rescue training for emergency volunteers and humanitarian professionals in Bangladesh.'
+  },
+  {
+    id: 'tc-2',
+    name: 'NIRAPAD (Network for Information, Response, & Preparedness Activities on Disaster)',
+    acronym: 'NIRAPAD Secretariat',
+    location: 'Banani, Dhaka, Bangladesh',
+    focusArea: 'Disaster Risk Management (DRM), Module Development, Capacity Building',
+    affiliation: 'Disaster Management Network Bangladesh',
+    website: 'https://nirapad.org.bd',
+    badge: 'National Humanitarian Knowledge Network',
+    details: 'Leading humanitarian knowledge network in Bangladesh developing standardized training modules, manuals, and DRM capacity building workshops for NGOs and humanitarian actors.'
+  },
+  {
+    id: 'tc-3',
+    name: 'BIPSOT (Bangladesh Institute of Peace Support Operation Training)',
+    acronym: 'BIPSOT HADR Wing',
+    location: 'Rajendrapur Cantonment, Gazipur, Bangladesh',
+    focusArea: 'Humanitarian Assistance & Disaster Relief (HADR), Civil-Military Coordination',
+    affiliation: 'Armed Forces Division & UN Peacekeeping Training Network',
+    website: 'https://bipsot.net',
+    badge: 'Armed Forces & UN HADR Institution',
+    details: 'Premier military and civilian training institute specializing in complex humanitarian emergency response, HADR operations, and international crisis management.'
+  },
+  {
+    id: 'tc-4',
+    name: 'Cyclone Preparedness Programme (CPP) Training Division',
+    acronym: 'CPP HQ & Coastal Hubs',
+    location: 'Disaster Management Bhaban, Mohakhali, Dhaka & Coastal Field Centers',
+    focusArea: 'Signal 1-10 Warning Protocols, Flag System, Shelter Evacuation, Megaphone Signaling',
+    affiliation: 'Joint Initiative of MoDMR & BDRCS',
+    website: 'http://cpp.gov.bd',
+    badge: 'Government & BDRCS Joint Program',
+    details: 'Trains over 76,000 coastal volunteers across Bangladesh in early weather warning signal dissemination, evacuation protocols, and emergency shelter protection.'
+  },
+  {
+    id: 'tc-5',
+    name: 'BRAC Humanitarian Crisis Management Programme (HCMP)',
+    acronym: 'BRAC HCMP Learning Center',
+    location: 'Cox\'s Bazar, Ukhiya & Regional Field Centers',
+    focusArea: 'Community Resilience, Emergency WASH, Psychological First Aid, Displacement Support',
+    affiliation: 'BRAC International & UN Partner Network',
+    website: 'https://www.brac.net',
+    badge: 'Global Humanitarian Actor',
+    details: 'Conducts large-scale field training for relief personnel, WASH engineers, and frontline responders managing flood and displacement emergencies.'
+  },
+  {
+    id: 'tc-6',
+    name: 'National Institute of Local Government (NILG)',
+    acronym: 'NILG Disaster Unit',
+    location: 'Agargaon, Sher-e-Bangla Nagar, Dhaka',
+    focusArea: 'Union & Ward Disaster Management Committee (UDMC/WDMC) Capacity Building',
+    affiliation: 'Ministry of Local Government, Rural Development & Co-operatives (LGRD)',
+    website: 'http://nilg.gov.bd',
+    badge: 'State Local Governance Institute',
+    details: 'Trains elected representatives, Union Parishad chairmen, and local government officials on disaster risk governance, emergency budget allocation, and relief distribution.'
+  }
+];
+
 export const BANGLADESH_TRAINING = [
   {
     id: 'tr-1',
     category: 'Volunteer Response Certification',
     title: 'BDRCS Community Volunteer Disaster Response Certification',
-    provider: 'Bangladesh Red Crescent Society',
+    provider: 'Bangladesh Red Crescent Society (BDRCS)',
     location: 'Sylhet & Sunamganj Field Center',
     duration: '3 Days Intensive (20-22 Aug 2026)',
     seats: '45 Seats Remaining',
@@ -570,8 +639,45 @@ export const BANGLADESH_TRAINING = [
     fee: 'Free',
     description: 'Comprehensive certification on flag signals, mega-phone announcements, evacuation procedures, and vulnerable group protection during monsoons.',
     syllabus: ['Module 1: Signal 1-10 Weather Warning Protocols', 'Module 2: Coastal Shelter Evacuation', 'Module 3: Women & Child Protection']
+  },
+  {
+    id: 'tr-4',
+    category: 'Disaster Risk Management (DRM)',
+    title: 'NIRAPAD Disaster Risk Management (DRM) Professional Masterclass',
+    provider: 'NIRAPAD Network Bangladesh',
+    location: 'Banani, Dhaka / Online Hybrid',
+    duration: '5 Days (01-05 Sept 2026)',
+    seats: '25 Seats Remaining',
+    fee: 'Free for NGO Responders',
+    description: 'Standardized DRM framework masterclass covering multi-hazard risk assessment, emergency response plan design, and climate adaptation.',
+    syllabus: ['Module 1: Community Risk Assessment (CRA)', 'Module 2: Emergency Response Planning', 'Module 3: Post-Disaster Damage Needs Assessment (DNCA)']
+  },
+  {
+    id: 'tr-5',
+    category: 'HADR & Civil-Military Coordination',
+    title: 'BIPSOT Humanitarian Assistance & Disaster Relief (HADR) Course',
+    provider: 'BIPSOT Cantonment Institute',
+    location: 'Rajendrapur Cantonment, Gazipur',
+    duration: '1 Week Intensive (10-17 Sept 2026)',
+    seats: '20 Seats Remaining',
+    fee: 'Government Sponsored',
+    description: 'Specialized training for civil-military coordination in complex flood rescue operations, aerial logistics, and medical evacuation.',
+    syllabus: ['Module 1: Joint Rescue Command Structure', 'Module 2: Air Mobility & Boat Evacuations', 'Module 3: Field Hospital Triage']
+  },
+  {
+    id: 'tr-6',
+    category: 'Local Governance & Relief',
+    title: 'NILG Union Parishad Disaster Committee (UDMC) Capacity Workshop',
+    provider: 'National Institute of Local Government (NILG)',
+    location: 'Agargaon, Dhaka HQ',
+    duration: '2 Days (15-16 Sept 2026)',
+    seats: '50 Seats Remaining',
+    fee: 'Government Sponsored',
+    description: 'Empowering local government leaders and Union Parishad members to manage emergency relief funds, NID verification, and fair aid allocation.',
+    syllabus: ['Day 1: Emergency Relief Allocation Laws', 'Day 2: Citizen Ledger Transparency & Audit']
   }
 ];
+
 
 // Wikipedia Historical Flood Damage & Frequency Dataset (1954 - 2026)
 export const HISTORIC_FLOOD_STATS = [
