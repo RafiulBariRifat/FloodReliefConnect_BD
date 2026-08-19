@@ -170,11 +170,11 @@ export default function Disasters() {
                         <div className="row g-2 text-center my-2 p-2 bg-light rounded-3">
                           <div className="col-6 border-end">
                             <div className="fw-bold text-dark small">{d.affectedPeople}</div>
-                            <div className="fs-8 text-muted">Affected</div>
+                            <div className="fs-8 text-muted fw-semibold">Affected</div>
                           </div>
                           <div className="col-6">
-                            <div className="fw-bold text-primary small">{d.sheltersActive}</div>
-                            <div className="fs-8 text-muted">Relief Shelters</div>
+                            <div className="fw-extrabold text-dark small">{d.sheltersActive}</div>
+                            <div className="fs-8 text-muted fw-semibold">Relief Shelters</div>
                           </div>
                         </div>
 
