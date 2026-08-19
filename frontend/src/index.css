@@ -988,5 +988,34 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Relief Atmosphere Canvas Backgrounds */
+.rw-page-canvas-forms {
+  background: linear-gradient(160deg, #E6F4F1 0%, #ECFDF5 35%, #E0F2FE 70%, #F8FAFC 100%) !important;
+  min-height: 100vh;
+  padding-bottom: 5rem;
+  position: relative;
+}
+
+.rw-hero-forms {
+  background: linear-gradient(135deg, #0B3C5D 0%, #065F46 50%, #047857 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.rw-hero-forms .rw-hero-title {
+  color: #FFFFFF !important;
+  font-weight: 800;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.rw-hero-forms .rw-hero-subtitle {
+  color: #E2E8F0 !important;
+}
+
+.form-card {
+  box-shadow: 0 15px 45px rgba(6, 95, 70, 0.08) !important;
+}
+
+
 
 

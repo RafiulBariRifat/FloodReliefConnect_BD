@@ -160,11 +160,11 @@ export function Donate() {
 export function ApplyRelief() {
   const [f, setF] = useState({
     district_id: '',
-    family_members: '4',
-    vulnerable_count: '1',
+    family_members: '',
+    vulnerable_count: '',
     address_details: '',
     urgency_level: 'High',
-    requested_amount: '5000'
+    requested_amount: ''
   });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
@@ -217,11 +217,11 @@ export function ApplyRelief() {
     setErr('');
     setF({
       district_id: '',
-      family_members: '4',
-      vulnerable_count: '1',
+      family_members: '',
+      vulnerable_count: '',
       address_details: '',
       urgency_level: 'High',
-      requested_amount: '5000'
+      requested_amount: ''
     });
   };
 
@@ -388,6 +388,7 @@ export function ApplyRelief() {
                         type="number"
                         min="1"
                         required
+                        placeholder="e.g. 5"
                         className="text-center fw-bold fs-6 mb-0"
                         value={f.family_members}
                         onChange={(e) => setF({ ...f, family_members: e.target.value })}
@@ -418,6 +419,7 @@ export function ApplyRelief() {
                       <input
                         type="number"
                         min="0"
+                        placeholder="e.g. 2"
                         className="text-center fw-bold fs-6 mb-0"
                         value={f.vulnerable_count}
                         onChange={(e) => setF({ ...f, vulnerable_count: e.target.value })}
