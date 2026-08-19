@@ -608,7 +608,8 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     deathToll: '500,000+',
     date: '12 November 1970',
     notes: 'Deadliest tropical cyclone in recorded world history. Storm surge reached 10+ meters, submerging coastal islands.',
-    category: 'Cyclones & Storms'
+    category: 'Cyclones & Storms',
+    citation: 'Wikipedia / NOAA World Disaster Records'
   },
   {
     name: '1897 Great Bengal Cyclone',
@@ -617,7 +618,8 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     deathToll: '200,000+',
     date: '24 October 1897',
     notes: 'A 12.2-meter (40 ft) tidal surge hit the Meghna estuary, causing widespread famine, epidemics, and property destruction.',
-    category: 'Cyclones & Storms'
+    category: 'Cyclones & Storms',
+    citation: 'Wikipedia / India Meteorological Department'
   },
   {
     name: '1876 Great Backerganj Cyclone',
@@ -626,7 +628,8 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     deathToll: '200,000',
     date: '31 October 1876',
     notes: 'Half of the victims drowned in the surge; another 100,000 perished from post-cyclone famine and cholera.',
-    category: 'Cyclones & Storms'
+    category: 'Cyclones & Storms',
+    citation: 'Wikipedia / Imperial Gazetteer Records'
   },
   {
     name: '1991 Bangladesh Cyclone (Marian)',
@@ -635,7 +638,8 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     deathToll: '138,866',
     date: '29 April 1991',
     notes: 'Wind speeds reached 260 km/h with a 6-meter storm surge. Left 10 million homeless and destroyed 100,000+ livestock.',
-    category: 'Cyclones & Storms'
+    category: 'Cyclones & Storms',
+    citation: 'Wikipedia / BWDB Official Disaster Report'
   },
   {
     name: '1974 Bangladesh Famine & Floods',
@@ -644,16 +648,18 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     deathToll: '2,000+ (Floods) / 27,000+ (Famine)',
     date: 'May - October 1974',
     notes: 'Massive monsoon flooding submerged 36.6% of Bangladesh, destroying seasonal paddy crops.',
-    category: 'Monsoon Floods'
+    category: 'Monsoon Floods',
+    citation: 'Wikipedia / International Food Policy Research Institute'
   },
   {
     name: '2013 Rana Plaza Collapse',
-    type: 'Building Collapse',
+    type: 'Structural Failure',
     location: 'Savar Upazila, Dhaka District',
     deathToll: '1,134',
     date: '24 April 2013',
-    notes: 'Deadliest structural failure disaster in modern history. Over 2,500 injured garment workers rescued.',
-    category: 'Structural Failures'
+    notes: 'Deadliest structural failure disaster in modern history. Over 2,500 injured garment workers rescued. (The Guardian / ILO Report)',
+    category: 'Structural Failures',
+    citation: 'The Guardian / ILO Official Report'
   },
   {
     name: '1988 Catastrophic Megaflood',
@@ -662,7 +668,8 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     deathToll: '2,373',
     date: 'August - September 1988',
     notes: 'Dhaka capital submerged for 20 days. Over 45 million people affected; return period estimated at 50-100 years.',
-    category: 'Monsoon Floods'
+    category: 'Monsoon Floods',
+    citation: 'Wikipedia / Bangladesh Water Development Board'
   },
   {
     name: '1998 Flood of the Century',
@@ -671,7 +678,8 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     deathToll: '1,050',
     date: 'July - September 1998',
     notes: 'Prolonged 65-day megaflood. Made 30 million people homeless and destroyed 700,000 hectares of crops.',
-    category: 'Monsoon Floods'
+    category: 'Monsoon Floods',
+    citation: 'Wikipedia / Disaster Management Bureau'
   },
   {
     name: '1986 MV Shamia Ferry Disaster',
@@ -679,8 +687,9 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     location: 'Meghna River (Near Chandpur)',
     deathToll: '600',
     date: '25 May 1986',
-    notes: 'Overloaded double-decker ferry capsized during a sudden nor\'wester squall in the Meghna River.',
-    category: 'Maritime Disasters'
+    notes: 'Overloaded double-decker ferry capsized during a sudden nor\'wester squall in the Meghna River. (The Daily Star Report)',
+    category: 'Maritime Disasters',
+    citation: 'The Daily Star / Reuters Disaster Archive'
   },
   {
     name: '2002 MV Salahuddin-2 Ferry Crash',
@@ -688,8 +697,29 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     location: 'Meghna River',
     deathToll: '450+',
     date: '3 May 2002',
-    notes: 'Passenger ferry sank in deep waters of the Meghna River during stormy monsoon weather.',
-    category: 'Maritime Disasters'
+    notes: 'Passenger ferry sank in deep waters of the Meghna River during stormy monsoon weather. (Reuters Maritime Archive)',
+    category: 'Maritime Disasters',
+    citation: 'Reuters Maritime Chronology'
+  },
+  {
+    name: '2007 Cyclone Sidr',
+    type: 'Category 5 Cyclone',
+    location: 'Barguna, Patuakhali, Sundarbans Coast',
+    deathToll: '3,447 (Official) / 10,000+ (Est)',
+    date: '15 November 2007',
+    notes: 'Devastating Category 5 cyclone struck southern coast with 5-meter surges, wrecking Sundarbans mangrove buffer.',
+    category: 'Cyclones & Storms',
+    citation: 'Wikipedia / Red Cross Red Crescent Appeal'
+  },
+  {
+    name: '2009 Cyclone Aila',
+    type: 'Severe Cyclonic Storm',
+    location: 'Satkhira, Khulna, Coastal Chars',
+    deathToll: '190+',
+    date: '25 May 2009',
+    notes: 'Breached coastal embankments causing long-term saline inundation of 200,000 homes in southwestern coastal districts.',
+    category: 'Cyclones & Storms',
+    citation: 'Wikipedia / Ministry of Disaster Management'
   },
   {
     name: '1984 Biman Airlines Fokker Crash',
@@ -697,10 +727,12 @@ export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
     location: 'Near Dhaka Shahjalal Airport',
     deathToll: '49',
     date: '5 August 1984',
-    notes: 'Fokker F27 plane crashed into a swamp near Dhaka airport while attempting to land in heavy rain.',
-    category: 'Aviation Accidents'
+    notes: 'Fokker F27 plane crashed into a swamp near Dhaka airport while attempting to land in heavy rain. (New York Times Archive)',
+    category: 'Aviation Accidents',
+    citation: 'The New York Times / Reuters Aviation Report'
   }
 ];
+
 
 
 

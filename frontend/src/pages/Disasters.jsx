@@ -92,6 +92,7 @@ export default function Disasters() {
                     <th>Affected Region / Location</th>
                     <th>Mortality (Death Toll)</th>
                     <th>Historical Date</th>
+                    <th>Official Citation Source</th>
                     <th>Disaster Impact Notes & Details</th>
                   </tr>
                 </thead>
@@ -112,6 +113,9 @@ export default function Disasters() {
                       </td>
                       <td>
                         <small className="text-muted font-monospace">{w.date}</small>
+                      </td>
+                      <td>
+                        <span className="badge bg-info bg-opacity-10 text-dark border border-info-subtle fw-semibold">{w.citation}</span>
                       </td>
                       <td>
                         <span className="small text-secondary leading-relaxed">{w.notes}</span>
