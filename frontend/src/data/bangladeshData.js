@@ -599,4 +599,108 @@ export const WIKIPEDIA_FLOOD_COMPENDIUM = {
   `
 };
 
+// Wikipedia Historical Disasters in Bangladesh by Death Toll Dataset
+export const WIKIPEDIA_DISASTERS_BY_DEATH_TOLL = [
+  {
+    name: '1970 Bhola Cyclone',
+    type: 'Tropical Cyclone & Surge',
+    location: 'Bhola, Patuakhali, Noakhali, Chittagong',
+    deathToll: '500,000+',
+    date: '12 November 1970',
+    notes: 'Deadliest tropical cyclone in recorded world history. Storm surge reached 10+ meters, submerging coastal islands.',
+    category: 'Cyclones & Storms'
+  },
+  {
+    name: '1897 Great Bengal Cyclone',
+    type: 'Tropical Cyclone',
+    location: 'Bengal Estuary, Chittagong, Barisal',
+    deathToll: '200,000+',
+    date: '24 October 1897',
+    notes: 'A 12.2-meter (40 ft) tidal surge hit the Meghna estuary, causing widespread famine, epidemics, and property destruction.',
+    category: 'Cyclones & Storms'
+  },
+  {
+    name: '1876 Great Backerganj Cyclone',
+    type: 'Tropical Cyclone',
+    location: 'Backerganj (Barisal / Bhola Coast)',
+    deathToll: '200,000',
+    date: '31 October 1876',
+    notes: 'Half of the victims drowned in the surge; another 100,000 perished from post-cyclone famine and cholera.',
+    category: 'Cyclones & Storms'
+  },
+  {
+    name: '1991 Bangladesh Cyclone (Marian)',
+    type: 'Category 5 Cyclone',
+    location: 'Chittagong, Cox\'s Bazar, Noakhali, Bhola',
+    deathToll: '138,866',
+    date: '29 April 1991',
+    notes: 'Wind speeds reached 260 km/h with a 6-meter storm surge. Left 10 million homeless and destroyed 100,000+ livestock.',
+    category: 'Cyclones & Storms'
+  },
+  {
+    name: '1974 Bangladesh Famine & Floods',
+    type: 'Monsoon Flood & Famine',
+    location: 'Brahmaputra Basin & Nationwide',
+    deathToll: '2,000+ (Floods) / 27,000+ (Famine)',
+    date: 'May - October 1974',
+    notes: 'Massive monsoon flooding submerged 36.6% of Bangladesh, destroying seasonal paddy crops.',
+    category: 'Monsoon Floods'
+  },
+  {
+    name: '2013 Rana Plaza Collapse',
+    type: 'Building Collapse',
+    location: 'Savar Upazila, Dhaka District',
+    deathToll: '1,134',
+    date: '24 April 2013',
+    notes: 'Deadliest structural failure disaster in modern history. Over 2,500 injured garment workers rescued.',
+    category: 'Structural Failures'
+  },
+  {
+    name: '1988 Catastrophic Megaflood',
+    type: 'Monsoon River Flood',
+    location: 'Nationwide (60% Submerged)',
+    deathToll: '2,373',
+    date: 'August - September 1988',
+    notes: 'Dhaka capital submerged for 20 days. Over 45 million people affected; return period estimated at 50-100 years.',
+    category: 'Monsoon Floods'
+  },
+  {
+    name: '1998 Flood of the Century',
+    type: 'Monsoon Mega-Flood',
+    location: 'Nationwide (75% Submerged)',
+    deathToll: '1,050',
+    date: 'July - September 1998',
+    notes: 'Prolonged 65-day megaflood. Made 30 million people homeless and destroyed 700,000 hectares of crops.',
+    category: 'Monsoon Floods'
+  },
+  {
+    name: '1986 MV Shamia Ferry Disaster',
+    type: 'Maritime Disaster',
+    location: 'Meghna River (Near Chandpur)',
+    deathToll: '600',
+    date: '25 May 1986',
+    notes: 'Overloaded double-decker ferry capsized during a sudden nor\'wester squall in the Meghna River.',
+    category: 'Maritime Disasters'
+  },
+  {
+    name: '2002 MV Salahuddin-2 Ferry Crash',
+    type: 'Maritime Disaster',
+    location: 'Meghna River',
+    deathToll: '450+',
+    date: '3 May 2002',
+    notes: 'Passenger ferry sank in deep waters of the Meghna River during stormy monsoon weather.',
+    category: 'Maritime Disasters'
+  },
+  {
+    name: '1984 Biman Airlines Fokker Crash',
+    type: 'Aviation Accident',
+    location: 'Near Dhaka Shahjalal Airport',
+    deathToll: '49',
+    date: '5 August 1984',
+    notes: 'Fokker F27 plane crashed into a swamp near Dhaka airport while attempting to land in heavy rain.',
+    category: 'Aviation Accidents'
+  }
+];
+
+
 

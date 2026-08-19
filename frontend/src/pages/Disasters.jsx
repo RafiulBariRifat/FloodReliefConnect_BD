@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Flame, AlertTriangle, MapPin, Calendar, ArrowLeft, HeartHandshake, ShieldAlert, Activity } from 'lucide-react';
-import { BANGLADESH_DISASTERS } from '../data/bangladeshData.js';
+import { Flame, AlertTriangle, MapPin, Calendar, ArrowLeft, HeartHandshake, ShieldAlert, Activity, BookOpen, Globe, ExternalLink, Skull } from 'lucide-react';
+import { BANGLADESH_DISASTERS, WIKIPEDIA_DISASTERS_BY_DEATH_TOLL } from '../data/bangladeshData.js';
 
 export default function Disasters() {
   const [selectedDisasterType, setSelectedDisasterType] = useState('All');
+  const [activeTab, setActiveTab] = useState('live'); // 'live' | 'wiki'
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,11 +23,11 @@ export default function Disasters() {
       <section className="rw-page-hero rw-hero-disasters">
         <div className="container">
           <span className="rw-hero-eyebrow">
-            <ShieldAlert size={14} className="text-danger" /> BANGLADESH CRISIS DESK
+            <ShieldAlert size={14} className="text-danger" /> BANGLADESH CRISIS DESK & WIKIPEDIA DISASTER ARCHIVE
           </span>
-          <h1 className="rw-hero-title">Emergency Disaster Monitor</h1>
+          <h1 className="rw-hero-title">Emergency Disaster Monitor & Historical Archive</h1>
           <p className="rw-hero-subtitle">
-            Real-time status tracking across Bangladesh flood zones, landslides, embankment breaches, and coastal cyclone alerts.
+            Real-time status tracking across Bangladesh flood zones, alongside Wikipedia's official historical disaster death toll archive (1876 - 2026).
           </p>
 
           <div className="d-flex align-items-center gap-3 mt-4 flex-wrap">
@@ -39,63 +40,152 @@ export default function Disasters() {
       </section>
 
       <div className="container">
-        {/* Disaster Type Filter Options */}
-        <div className="rw-filter-bar mb-4">
-          {types.map(t => (
+        {/* Navigation Mode Tabs */}
+        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+          <div className="d-flex align-items-center gap-2 bg-white p-1.5 rounded-pill border shadow-sm" style={{ maxWidth: '480px', width: '100%' }}>
             <button
-              key={t}
-              className={`rw-filter-pill ${selectedDisasterType === t ? 'active' : ''}`}
-              onClick={() => setSelectedDisasterType(t)}
+              className={`btn btn-sm rounded-pill px-3 py-2 flex-grow-1 fw-bold border-0 ${activeTab === 'live' ? 'btn-danger text-white' : 'text-muted'}`}
+              onClick={() => setActiveTab('live')}
             >
-              <Flame size={14} className="me-1" />
-              {t}
+              <Activity size={15} className="me-1" /> Live Crises (2026)
             </button>
-          ))}
+            <button
+              className={`btn btn-sm rounded-pill px-3 py-2 flex-grow-1 fw-bold border-0 ${activeTab === 'wiki' ? 'btn-danger text-white' : 'text-muted'}`}
+              onClick={() => setActiveTab('wiki')}
+            >
+              <Skull size={15} className="me-1" /> Wikipedia Death Toll Archive
+            </button>
+          </div>
+
+          <a
+            href="https://en.wikipedia.org/wiki/List_of_disasters_in_Bangladesh_by_death_toll"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-sm btn-outline-danger rounded-pill px-3 py-2 fw-semibold d-inline-flex align-items-center gap-1.5"
+          >
+            <Globe size={14} className="text-danger" />
+            <span>Wikipedia Death Toll Source</span>
+            <ExternalLink size={12} />
+          </a>
         </div>
 
-        {/* Disaster Cards Grid */}
-        <div className="row g-4">
-          {filteredDisasters.map(d => (
-            <div key={d.id} className="col-md-6 col-lg-4">
-              <Link to={`/disasters/${d.id}`} className="text-decoration-none">
-                <div className="rw-news-card h-100 border-0 shadow-sm" style={{ borderLeft: '4px solid #E53E3E' }}>
-                  <div className="rw-card-image-wrap" style={{ height: '190px' }}>
-                    <img src={d.image} alt={d.title} className="rw-card-image" loading="lazy" />
-                    <span className="rw-card-category-badge alert">
-                      <AlertTriangle size={11} className="me-1" />{d.status}
-                    </span>
-                    <span className="rw-card-division-badge">
-                      <MapPin size={11} className="me-1" />{d.district}
-                    </span>
-                  </div>
-                  <div className="rw-card-body">
-                    <div className="small text-danger fw-bold mb-1 text-uppercase">
-                      {d.type} &bull; {d.division}
-                    </div>
-                    <h2 className="rw-card-title">{d.title}</h2>
-                    <p className="rw-card-excerpt">{d.description}</p>
-
-                    <div className="row g-2 text-center my-2 p-2 bg-light rounded-3">
-                      <div className="col-6 border-end">
-                        <div className="fw-bold text-dark small">{d.affectedPeople}</div>
-                        <div className="fs-8 text-muted">Affected</div>
-                      </div>
-                      <div className="col-6">
-                        <div className="fw-bold text-primary small">{d.sheltersActive}</div>
-                        <div className="fs-8 text-muted">Relief Shelters</div>
-                      </div>
-                    </div>
-
-                    <div className="rw-card-footer mt-auto">
-                      <span className="badge bg-secondary bg-opacity-10 text-dark fw-bold">{d.glide}</span>
-                      <span className="rw-card-date">{d.date}</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+        {/* Wikipedia Historical Disasters by Death Toll View */}
+        {activeTab === 'wiki' && (
+          <div className="bg-white rounded-3 border p-4 mb-5 shadow-sm">
+            <div className="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+              <div>
+                <h3 className="h5 fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+                  <BookOpen size={18} className="text-danger" />
+                  Wikipedia: Major Disasters in Bangladesh Sorted by Death Toll
+                </h3>
+                <small className="text-muted">Compiled from official Wikipedia historical records and national disaster archives</small>
+              </div>
+              <span className="badge bg-danger px-3 py-1.5 fw-bold">Top Historical Tragedies</span>
             </div>
-          ))}
-        </div>
+
+            <div className="table-responsive">
+              <table className="rw-table">
+                <thead>
+                  <tr>
+                    <th>Disaster Name</th>
+                    <th>Disaster Category</th>
+                    <th>Affected Region / Location</th>
+                    <th>Mortality (Death Toll)</th>
+                    <th>Historical Date</th>
+                    <th>Disaster Impact Notes & Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {WIKIPEDIA_DISASTERS_BY_DEATH_TOLL.map((w, idx) => (
+                    <tr key={idx}>
+                      <td>
+                        <b className="text-danger fs-6">{w.name}</b>
+                      </td>
+                      <td>
+                        <span className="badge bg-light text-dark border fw-bold">{w.type}</span>
+                      </td>
+                      <td>
+                        <small className="fw-semibold text-dark">{w.location}</small>
+                      </td>
+                      <td>
+                        <b className="text-danger fs-6">{w.deathToll}</b>
+                      </td>
+                      <td>
+                        <small className="text-muted font-monospace">{w.date}</small>
+                      </td>
+                      <td>
+                        <span className="small text-secondary leading-relaxed">{w.notes}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Live Crisis Tab */}
+        {activeTab === 'live' && (
+          <>
+            {/* Disaster Type Filter Options */}
+            <div className="rw-filter-bar mb-4">
+              {types.map(t => (
+                <button
+                  key={t}
+                  className={`rw-filter-pill ${selectedDisasterType === t ? 'active' : ''}`}
+                  onClick={() => setSelectedDisasterType(t)}
+                >
+                  <Flame size={14} className="me-1" />
+                  {t}
+                </button>
+              ))}
+            </div>
+
+            {/* Disaster Cards Grid */}
+            <div className="row g-4">
+              {filteredDisasters.map(d => (
+                <div key={d.id} className="col-md-6 col-lg-4">
+                  <Link to={`/disasters/${d.id}`} className="text-decoration-none">
+                    <div className="rw-news-card h-100 border-0 shadow-sm" style={{ borderLeft: '4px solid #E53E3E' }}>
+                      <div className="rw-card-image-wrap" style={{ height: '190px' }}>
+                        <img src={d.image} alt={d.title} className="rw-card-image" loading="lazy" />
+                        <span className="rw-card-category-badge alert">
+                          <AlertTriangle size={11} className="me-1" />{d.status}
+                        </span>
+                        <span className="rw-card-division-badge">
+                          <MapPin size={11} className="me-1" />{d.district}
+                        </span>
+                      </div>
+                      <div className="rw-card-body">
+                        <div className="small text-danger fw-bold mb-1 text-uppercase">
+                          {d.type} &bull; {d.division}
+                        </div>
+                        <h2 className="rw-card-title">{d.title}</h2>
+                        <p className="rw-card-excerpt">{d.description}</p>
+
+                        <div className="row g-2 text-center my-2 p-2 bg-light rounded-3">
+                          <div className="col-6 border-end">
+                            <div className="fw-bold text-dark small">{d.affectedPeople}</div>
+                            <div className="fs-8 text-muted">Affected</div>
+                          </div>
+                          <div className="col-6">
+                            <div className="fw-bold text-primary small">{d.sheltersActive}</div>
+                            <div className="fs-8 text-muted">Relief Shelters</div>
+                          </div>
+                        </div>
+
+                        <div className="rw-card-footer mt-auto">
+                          <span className="badge bg-secondary bg-opacity-10 text-dark fw-bold">{d.glide}</span>
+                          <span className="rw-card-date">{d.date}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
