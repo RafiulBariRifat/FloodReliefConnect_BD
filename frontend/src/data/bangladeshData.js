@@ -422,11 +422,6 @@ export const BANGLADESH_ARTICLES = [
     image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop',
     pdfSize: '2.1 MB'
   }
-    views: '13.1k',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=600&auto=format&fit=crop',
-    pdfSize: '3.8 MB'
-  }
 ];
 
 export const BANGLADESH_MOST_READ = [
